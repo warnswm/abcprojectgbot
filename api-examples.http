@@ -1,0 +1,57 @@
+### Регистрация пользователя
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+    "username": "testuser",
+    "password": "password123",
+    "name": "Тест Пользователь"
+}
+
+###
+
+### Авторизация
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+    "username": "testuser",
+    "password": "password123"
+}
+
+###
+
+### Генерация Telegram токена
+POST http://localhost:8080/api/telegram/generate-token
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTYzMjEyMzQ1NiwiZXhwIjoxNjMyMjA5ODU2fQ.example
+
+###
+
+### Получение текущего токена
+GET http://localhost:8080/api/telegram/current-token
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTYzMjEyMzQ1NiwiZXhwIjoxNjMyMjA5ODU2fQ.example
+
+###
+
+### Отвязка Telegram токена
+POST http://localhost:8080/api/telegram/unlink
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTYzMjEyMzQ1NiwiZXhwIjoxNjMyMjA5ODU2fQ.example
+
+###
+
+### Отправка сообщения
+POST http://localhost:8080/api/messages/send
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTYzMjEyMzQ1NiwiZXhwIjoxNjMyMjA5ODU2fQ.example
+Content-Type: application/json
+
+{
+    "content": "Привет! Это тестовое сообщение из API."
+}
+
+###
+
+### Получение всех сообщений пользователя
+GET http://localhost:8080/api/messages/my
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTYzMjEyMzQ1NiwiZXhwIjoxNjMyMjA5ODU2fQ.example
+
+###

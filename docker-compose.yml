@@ -1,0 +1,38 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: telegram_bot_postgres
+    environment:
+      POSTGRES_DB: telegram_bot_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  app:
+    build: .
+    container_name: telegram_bot_app
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/telegram_bot_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: password
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-7874411750:AAHEBjQUxH0bWzA4F-vC37DlbKf7MYqxLqs}
+      TELEGRAM_BOT_USERNAME: ${TELEGRAM_BOT_USERNAME:-abcbottestprojectbot}
+      JWT_SECRET: bXlTZWNyZXRLZXkxMjM0NTY3ODkwMTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MA==
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
