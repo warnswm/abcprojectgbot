@@ -16,8 +16,6 @@ docker-compose up -d
 curl http://localhost:8080/actuator/health
 ```
 
-Должно вернуть: `{"status":"UP"}`
-
 ## API endpoints
 
 ### Регистрация
