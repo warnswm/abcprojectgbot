@@ -180,5 +180,3 @@ docker-compose up -d postgres
 
 - Java 17 + Spring Boot
 - PostgreSQL
-- JWT авторизация (24 часа)
-- Порт: 8080
